@@ -1,54 +1,44 @@
 package lab3;
 
 public class GameOfLife {
-    private int size;
-    private int [][] board;
-    private int [][] previous;
+    int size;
+    int [][] board;
+    int [][] previous;
 
     public GameOfLife (){
     }
 
     public GameOfLife(int s){
         size = s;
+        board = new int[s][s];
+        previous = new int[s][s];
     }
 
-    public GameOfLife(int[][] b){
-        board = b;
+    public GameOfLife(int[][] a){
+        size = a.length;
+        board = new int[size][size];
+        previous = new int[size][size];
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j < a[i].length;j++){
+                previous = a[i][j];
+            }
+        }
     }
 
-//    public void setSize(int size) {
-//        this.size = size;
-//    }
-//
-//    public void setBoard(int[][] board) {
-//        this.board = board;
-//    }
-//
-//    public void setPrevious(int[][] previous) {
-//        this.previous = previous;
-//    }
-
-    public int getSize() {
-        return size;
+    public int[][] getBoard() {
+        return board;
     }
 
-//    public int[][] getBoard() {
-//        return board;
-//    }
-//
-//    public int[][] getPrevious() {
-//        return previous;
-//    }
-
-    public static void oneStep(){
+    public void oneStep(){
 
     }
 
-    public static void neighbors(int row, int col){
+    public void neighbors(int row, int col){
 
     }
 
-    public static void evolution(int n){
+    public  void evolution(int n){
+
 
     }
 
