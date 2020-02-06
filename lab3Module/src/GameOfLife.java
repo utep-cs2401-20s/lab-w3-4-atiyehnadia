@@ -30,15 +30,43 @@ public class GameOfLife {
     }
 
     public void oneStep(){
+        board = evolution()
     }
 
-    public void neighbors(int row, int col){
-
+    public int neighbors(int row, int col){
+        int neighbors = 0;
+        int dead = 0;
+        int alive = 1;
+        for(int i = row - 1; i < row + 1; i++){
+            for(int j = col - 1; j < col +1; j++){
+                if(board[i][j] == alive && (row != i|| col != j)){
+                    neighbors ++;
+                }
+            }
+        }
+        return neighbors;
     }
 
-    public  void evolution(int n){
-
-
+    public int [][] evolution(int n){
+        int dead = 0;
+        int alive = 1;
+        for(int i = 1; i < n; i++){
+            for(int j = 1; j< n; j++){
+                int neighbors = neighbors(i,j);
+                if(board[i][j] == alive){
+                    if((neighbors < 2)) || (neighbors > 3)){
+                        previous[i][j]= dead;
+                    }
+                    if((neighbors == 2) || (neighbors == 3)){
+                        previous[i][j] = alive;
+                    }
+                }
+                if(board[i][j] == dead & neighbors == 3){
+                    previous[i][j] = alive;
+                }
+            }
+        }
+        return previous;
     }
 
 }
