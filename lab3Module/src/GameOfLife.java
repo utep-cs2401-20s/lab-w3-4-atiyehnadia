@@ -30,7 +30,6 @@ public class GameOfLife {
     }
 
     public void oneStep(){
-
     }
 
     public void neighbors(int row, int col){
