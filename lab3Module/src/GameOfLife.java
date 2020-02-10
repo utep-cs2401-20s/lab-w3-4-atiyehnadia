@@ -1,5 +1,7 @@
 package lab3;
 
+import java.util.Arrays;
+
 public class GameOfLife {
     int size;
     int [][] board;
@@ -52,6 +54,9 @@ public class GameOfLife {
                 else if(board[i][j] == dead && neighbors == 3){
                     tempArray[i][j] = alive;
                 }
+                else{
+                    tempArray[i][j] = dead;
+                }
             }
         }
         previous = board;
@@ -75,6 +80,12 @@ public class GameOfLife {
         while(n != 0){
             n--;
             oneStep();
+        }
+    }
+
+    public void printBoard(){
+        for(int[] i : board){
+            System.out.println(Arrays.toString(i));
         }
     }
 }
