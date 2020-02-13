@@ -1,8 +1,15 @@
-package lab3;
+//package lab3;
 
 import java.util.Arrays;
 
-public class TorusGameOfLife extends lab3.GameOfLife {
+public class TorusGameOfLife extends GameOfLife {
+    public static void main (String [] args){
+        int [][] array = {{0, 0, 0 ,0, 0}, {0, 0, 0, 0, 0}, {0, 1, 1, 1, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
+        GameOfLife test1 = new GameOfLife(array);
+        test1.evolution(4);
+        //test1.neighbors(4,4);
+        test1.printBoard();
+    }
 
     public TorusGameOfLife(){
         super();
@@ -17,7 +24,7 @@ public class TorusGameOfLife extends lab3.GameOfLife {
     }
 
     public static void main (String [] args){
-        System.out.print("Hello");
+
     }
 
     public void oneStep(){
