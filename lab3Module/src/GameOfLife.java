@@ -4,15 +4,19 @@ import java.util.Arrays;
 
 public class GameOfLife {
     int size;
+    int size2;
     int [][] board;
     int [][] previous;
 
     public static void main (String [] args){
-        int [][] array = {{0, 0, 0 ,0, 0}, {0, 0, 0, 0, 0}, {0, 1, 1, 1, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
+        int [][] array = {{0, 0, 1},
+                {1, 0, 1},
+                {0, 1, 1,}};
         GameOfLife test1 = new GameOfLife(array);
-        test1.evolution(4);
-        //test1.neighbors(4,4);
+        test1.evolution(1);
         test1.printBoard();
+
+
     }
 
     public GameOfLife (){
@@ -26,6 +30,10 @@ public class GameOfLife {
 
     public GameOfLife(int[][] a){
         size = a.length;
+        size2 = 0;
+        for(int i = 0; i< a.length; i++){
+            size2 = a[i].length;
+        }
         board = new int[size][size];
         previous = new int[size][size];
         for(int i = 0; i < a.length; i++){
@@ -70,7 +78,7 @@ public class GameOfLife {
                 }
                 if (previous[i][j] == alive && ((neighbors == 2) || (neighbors == 3))) {
                     board[i][j] = alive;
-                } else if(previous[i][j] == alive && (neighbors > 3 || neighbors <3)){
+                } else if(previous[i][j] == alive && (neighbors > 3 || neighbors < 2)){
                     board[i][j] = dead;
                 }
             }

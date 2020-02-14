@@ -4,10 +4,12 @@ import java.util.Arrays;
 
 public class TorusGameOfLife extends GameOfLife {
     public static void main (String [] args){
-        int [][] array = {{0, 0, 0 ,0, 0}, {0, 0, 0, 0, 0}, {0, 1, 1, 1, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
-        GameOfLife test1 = new GameOfLife(array);
-        test1.evolution(4);
-        //test1.neighbors(4,4);
+        int [][] array = {{0, 0, 1, 0},
+                          {1, 0, 1, 0},
+                          {0, 1, 1, 0},
+                          {0, 0, 1, 0}};
+        TorusGameOfLife test1 = new TorusGameOfLife(array);
+        test1.evolution(1);
         test1.printBoard();
     }
 
@@ -22,51 +24,80 @@ public class TorusGameOfLife extends GameOfLife {
         previous = new int[s][s];
 
     }
+    public TorusGameOfLife(int[][] a){
+        size = a.length;
+        size2 = 0;
+        for(int i = 0; i< a.length; i++){
+            size2 = a[i].length;
+        }
 
-    public static void main (String [] args){
-
+        board = new int[size][size2];
+        previous = new int[size][size2];
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j < a[i].length;j++) {
+                previous[i][j] = a[i][j];
+            }
+        }
     }
 
     public void oneStep(){
-        int [][]tempArray = new int[size][size];
         int alive = 1;
         int dead = 0;
-        for(int i = 0; i < size - 1; i++){
-            for(int j = 0; j < size - 1; j++){
+        for(int i = 0; i < previous.length; i++) {
+            for (int j = 0; j < previous[i].length; j++) {
                 int neighbors = neighbors(i,j);
-                if(board[i][j] == alive){
-                    if((neighbors < 2) || (neighbors > 3)){
-                        tempArray[i][j]= dead;
-                    }
-                    else if((neighbors == 2) || (neighbors == 3)){
-                        tempArray[i][j] = alive;
-                    }
+                if (previous[i][j] == dead && neighbors == 3) {
+                    board[i][j] = alive;
                 }
-                else if(board[i][j] == dead && neighbors == 3){
-                    tempArray[i][j] = alive;
-                }
-                else{
-                    tempArray[i][j] = dead;
+                if (previous[i][j] == alive && ((neighbors == 2) || (neighbors == 3))) {
+                    board[i][j] = alive;
+                } else if(previous[i][j] == alive && (neighbors > 3 || neighbors < 2)){
+                    board[i][j] = dead;
                 }
             }
         }
-        previous = board;
-        board = previous;
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++){
+                previous[i][j] = board[i][j];
+            }
+        }
     }
 
+
     @Override
-    public int neighbors(int row, int col){
+    public int neighbors(int row, int col) {
         int aliveNeighbors = 0;
         int alive = 1;
-        for(int i = row - 1; i <= row + 1; i++){
-            for(int j = col -1; j<= col + 1; j++){
-                if(board[i % size][j % size] == alive){
-                    aliveNeighbors++;
-                }
-            }
+        if (previous[(row + size )% size][((col - 1)+ size) % size] == alive) {
+            aliveNeighbors++;
         }
+        if (previous[(row + size) % size][((col+ 1) + size) % size] == alive) {
+             aliveNeighbors++;
+        }
+        if (previous[((row - 1) + size) % size][(col + size) % size] == alive) {
+            aliveNeighbors++;
+        }
+        if (previous[((row + 1) + size) % size][(col + size) % size] == alive) {
+            aliveNeighbors++;
+        }
+        if (previous[((row - 1) + size) % size][((col - 1) + size) % size] == alive) {
+            aliveNeighbors++;
+        }
+        if (previous[((row - 1)+ size) % size][((col + 1) + size) % size] == alive) {
+            aliveNeighbors++;
+        }
+        if (previous[((row + 1) + size) % size][((col - 1) + size) % size] == alive) {
+            aliveNeighbors++;
+        }
+        if (previous[((row + 1) + size) % size][((col + 1) + size)  % size] == alive) {
+            aliveNeighbors++;
+        }
+
         return aliveNeighbors;
     }
+
+
+
 
     public void evolution(int n){
         while(n != 0){
