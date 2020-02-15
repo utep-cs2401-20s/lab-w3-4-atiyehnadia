@@ -6,17 +6,6 @@ public class GameOfLife {
     int [][] board;
     int [][] previous;
 
-    public static void main (String [] args){
-        int [][] array = {{0, 0, 1},
-                {1, 0, 1},
-                {0, 1, 1,}};
-        GameOfLife test1 = new GameOfLife(array);
-        test1.evolution(1);
-        test1.printBoard();
-
-
-    }
-
     public GameOfLife (){
     }
 
