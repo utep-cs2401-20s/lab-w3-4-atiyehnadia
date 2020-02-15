@@ -1,15 +1,24 @@
-//package lab3;
-
 import java.util.Arrays;
 
 public class TorusGameOfLife extends GameOfLife {
     public static void main (String [] args){
-        int [][] array = {{0, 0, 1, 0},
-                          {1, 0, 1, 0},
-                          {0, 1, 1, 0},
-                          {0, 0, 1, 0}};
+        int [][] array = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
+        {1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1},
+        {1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+        {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
         TorusGameOfLife test1 = new TorusGameOfLife(array);
-        test1.evolution(1);
+        test1.evolution(14);
         test1.printBoard();
     }
 
@@ -27,7 +36,7 @@ public class TorusGameOfLife extends GameOfLife {
     public TorusGameOfLife(int[][] a){
         size = a.length;
         size2 = 0;
-        for(int i = 0; i< a.length; i++){
+        for(int i = 0; i < a.length; i++){
             size2 = a[i].length;
         }
 
@@ -68,36 +77,32 @@ public class TorusGameOfLife extends GameOfLife {
     public int neighbors(int row, int col) {
         int aliveNeighbors = 0;
         int alive = 1;
-        if (previous[(row + size )% size][((col - 1)+ size) % size] == alive) {
+        if (previous[(row + size)% size][((col - 1)+ size2) % size2] == alive) {
             aliveNeighbors++;
         }
-        if (previous[(row + size) % size][((col+ 1) + size) % size] == alive) {
+        if (previous[(row + size) % size][((col+ 1) + size2) % size2] == alive) {
              aliveNeighbors++;
         }
-        if (previous[((row - 1) + size) % size][(col + size) % size] == alive) {
+        if (previous[((row - 1) + size) % size][(col + size2) % size2] == alive) {
             aliveNeighbors++;
         }
-        if (previous[((row + 1) + size) % size][(col + size) % size] == alive) {
+        if (previous[((row + 1) + size) % size][(col + size2) % size2] == alive) {
             aliveNeighbors++;
         }
-        if (previous[((row - 1) + size) % size][((col - 1) + size) % size] == alive) {
+        if (previous[((row - 1) + size) % size][((col - 1) + size2) % size2] == alive) {
             aliveNeighbors++;
         }
-        if (previous[((row - 1)+ size) % size][((col + 1) + size) % size] == alive) {
+        if (previous[((row - 1)+ size) % size][((col + 1) + size2) % size2] == alive) {
             aliveNeighbors++;
         }
-        if (previous[((row + 1) + size) % size][((col - 1) + size) % size] == alive) {
+        if (previous[((row + 1) + size) % size][((col - 1) + size2) % size2] == alive) {
             aliveNeighbors++;
         }
-        if (previous[((row + 1) + size) % size][((col + 1) + size)  % size] == alive) {
+        if (previous[((row + 1) + size) % size][((col + 1) + size2)  % size2] == alive) {
             aliveNeighbors++;
         }
-
         return aliveNeighbors;
     }
-
-
-
 
     public void evolution(int n){
         while(n != 0){

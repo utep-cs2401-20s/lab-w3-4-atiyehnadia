@@ -1,5 +1,3 @@
-//package lab3;
-
 import java.util.Arrays;
 
 public class GameOfLife {
@@ -34,8 +32,8 @@ public class GameOfLife {
         for(int i = 0; i< a.length; i++){
             size2 = a[i].length;
         }
-        board = new int[size][size];
-        previous = new int[size][size];
+        board = new int[size][size2];
+        previous = new int[size][size2];
         for(int i = 0; i < a.length; i++){
             for(int j = 0; j < a[i].length;j++) {
                 previous[i][j] = a[i][j];
